@@ -1,0 +1,32 @@
+<div id="jogo">
+  <p>Saldo: <span id="saldo">100</span> moedas</p>
+  <input type="number" id="valorAposta" placeholder="Quanto quer apostar?">
+  <button onclick="apostar('cara')">Cara</button>
+  <button onclick="apostar('coroa')">Coroa</button>
+  <p id="resultado"></p>
+</div>
+
+<script>
+  let saldo = 100;
+
+  function apostar(escolha) {
+    let valor = parseInt(document.getElementById('valorAposta').value);
+    
+    if (valor > saldo || valor <= 0) {
+      alert("Saldo insuficiente ou valor inválido!");
+      return;
+    }
+
+    let sorteio = Math.random() < 0.5 ? 'cara' : 'coroa';
+    
+    if (escolha === sorteio) {
+      saldo += valor;
+      document.getElementById('resultado').innerText = "Você ganhou! Deu " + sorteio;
+    } else {
+      saldo -= valor;
+      document.getElementById('resultado').innerText = "Você perdeu! Deu " + sorteio;
+    }
+    
+    document.getElementById('saldo').innerText = saldo;
+  }
+</script>
